@@ -1,4 +1,6 @@
 package br.com.alura.ProjetoAlura.course;
+import br.com.alura.ProjetoAlura.user.Role;
+import br.com.alura.ProjetoAlura.user.User;
 import br.com.alura.ProjetoAlura.user.UserRepository;
 import br.com.alura.ProjetoAlura.util.ErrorItemDTO;
 import jakarta.validation.Valid;
@@ -29,7 +31,13 @@ public class CourseController {
         List<String> errorMessages = new ArrayList<>();
         String field = "";
 
-        if (userRepository.existsByEmail(newCourse.getInstructorEmail())) {
+        User user = userRepository.findByEmail((newCourse.getInstructorEmail()));
+        if(user == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorItemDTO("email", "Instrutor nao cadastrado na base de dados"));
+        }
+
+        if (user != null && user.getRole() == Role.STUDENT){
             errorMessages.add("Estudantes não podem criar cursos");
             field = "instructorEmail";
         }

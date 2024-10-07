@@ -1,43 +1,34 @@
 package br.com.alura.ProjetoAlura.registration;
 
-import br.com.alura.ProjetoAlura.course.Course;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@Entity(name = "Registration")
-public class NewRegistrationDTO {
+import java.util.Date;
 
+@Entity()
+public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
     @NotNull
-
-    private String courseCode;
-
-    @NotBlank
-    @NotNull
     @Email
     private String studentEmail;
 
-    @ManyToOne
-    @JoinColumn(name = "code" , insertable = false, updatable = false)
-    private Course newCourse;
-
-    @Column(name = "code")
+    @Column(name="course_code")
     private String code;
 
-    public NewRegistrationDTO() {}
+    private Date registrationDate;
 
-    public String getCourseCode() {
-        return courseCode;
-    }
+    public Registration() {}
 
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
+    public Registration(String studentEmail, String code, Date registrationDate) {
+        this.studentEmail = studentEmail;
+        this.code = code;
+        this.registrationDate = registrationDate;
     }
 
     public String getStudentEmail() {
@@ -47,5 +38,4 @@ public class NewRegistrationDTO {
     public void setStudentEmail(String studentEmail) {
         this.studentEmail = studentEmail;
     }
-
 }

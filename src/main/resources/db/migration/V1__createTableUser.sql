@@ -22,7 +22,7 @@ CREATE TABLE Course(
 CREATE TABLE Registration (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
     course_code VARCHAR(10) NOT NULL,
-    student_email VARCHAR(50) NOT NULL,
+    studentEmail VARCHAR(50) NOT NULL,
     createdAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (course_code) REFERENCES Course(code)

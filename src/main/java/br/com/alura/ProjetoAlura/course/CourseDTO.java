@@ -18,8 +18,8 @@ public class CourseDTO {
 
     @NotNull
     @NotBlank
-    @Length(min = 4, max = 10)
-    @Pattern(regexp = "^[a-zA-Z]+(-[a-zA-Z]+){0,2}$", message = "O código deve conter apenas letras e hífen, com um total entre 4 e 10 caracteres")
+    @Length(min = 4, max = 10, message="O codigo deve conter entre 4 a 10 caracteres")
+    @Pattern(regexp = "^[a-zA-Z]+(-[a-zA-Z]+){0,2}$", message = "O código deve conter apenas letras e pode ser separado por hifen, com um total entre 4 e 10 caracteres")
     private String code;
 
     private String description;
