@@ -41,11 +41,10 @@ public class RegistrationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ErrorItemDTO("code", "Estudante nao cadastrado na plataforma"));
         }
-        if(registrationRepository.existsByStudentEmail((newRegistration.getStudentEmail()))){
+        if(registrationRepository.existsByStudentEmailAndCode(newRegistration.getStudentEmail(), newRegistration.getCode())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorItemDTO("email", "Estudante ja cadastrado neste curso"));
         }
-
         if(course.getStatus() == INACTIVE){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorItemDTO("code", "Curso desativado"));
@@ -60,34 +59,20 @@ public class RegistrationController {
     public ResponseEntity<List<RegistrationReportItem>> report() {
         List<RegistrationReportItem> items = new ArrayList<>();
 
-        // TODO: Implementar a Questão 4 - Relatório de Cursos Mais Acessados aqui...
+        List<Object[]> results = registrationRepository.findCoursesWithRegistrationCount();
+        List<RegistrationReportItem> courses = new ArrayList<>();
 
-        // Dados fictícios abaixo que devem ser substituídos
-        items.add(new RegistrationReportItem(
-                "Java para Iniciantes",
-                "java",
-                "Charles",
-                "charles@alura.com.br",
-                10L
-        ));
+        for (Object[] result : results) {
+            String courseName = (String) result[0];
+            String courseCode = (String) result[1];
+            String instructorName = (String) result[2];
+            String instructorEmail = (String) result[3];
+            Long totalRegistrations = (Long) result[4];
 
-        items.add(new RegistrationReportItem(
-                "Spring para Iniciantes",
-                "spring",
-                "Charles",
-                "charles@alura.com.br",
-                9L
-        ));
+            courses.add(new RegistrationReportItem(courseName, courseCode, instructorName, instructorEmail, totalRegistrations));
+        }
 
-        items.add(new RegistrationReportItem(
-                "Maven para Avançados",
-                "maven",
-                "Charles",
-                "charles@alura.com.br",
-                9L
-        ));
-
-        return ResponseEntity.ok(items);
+        return ResponseEntity.ok(courses);
     }
 
 }
