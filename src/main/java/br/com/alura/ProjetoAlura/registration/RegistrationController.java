@@ -16,7 +16,7 @@ public class RegistrationController {
 
     @PostMapping("/registration/new")
     public ResponseEntity createCourse(@Valid @RequestBody NewRegistrationDTO newRegistration) {
-        // TODO: Implementar a Questão 3 - Criação de Matrículas aqui...
+
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
