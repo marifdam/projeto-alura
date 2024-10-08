@@ -33,7 +33,7 @@ public class CourseController {
 
         User user = userRepository.findByEmail((newCourse.getInstructorEmail()));
         if(user == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ErrorItemDTO("email", "Instrutor nao cadastrado na base de dados"));
         }
 

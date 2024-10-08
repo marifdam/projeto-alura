@@ -1,0 +1,5 @@
+br/com/alura/ProjetoAlura/user/UserTest.class
+br/com/alura/ProjetoAlura/user/UserControllerTest.class
+br/com/alura/ProjetoAlura/ProjetoAluraApplicationTests.class
+br/com/alura/ProjetoAlura/user/RegistrationControllerTest.class
+br/com/alura/ProjetoAlura/user/CourseControllerTest.class

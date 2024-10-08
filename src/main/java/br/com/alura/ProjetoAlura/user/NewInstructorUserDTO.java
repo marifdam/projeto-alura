@@ -12,12 +12,12 @@ public class NewInstructorUserDTO {
     @Length(min = 3, max = 50)
     private String name;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "o campo email nao pode estar vazio")
+    @Email(message = "o email nao e valido")
     private String email;
 
     @NotNull
-    @Length(min = 8, max = 16)
+    @Length(min = 8, max = 16, message="a senha deve conter entre 8 e 16 caracteres")
     private String password;
 
     public String getName() {
