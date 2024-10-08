@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NewStudentUserDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProjetoAlura</a> &gt; <a href="index.source.html" class="el_package">br.com.alura.ProjetoAlura.user</a> &gt; <span class="el_source">NewStudentUserDTO.java</span></div><h1>NewStudentUserDTO.java</h1><pre class="source lang-java linenums">package br.com.alura.ProjetoAlura.user;
+
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+
+import static br.com.alura.ProjetoAlura.user.Role.STUDENT;
+
+public class NewStudentUserDTO {
+
+    @NotNull
+    @Length(min = 3, max = 50)
+    private String name;
+
+    @NotBlank(message = &quot;o campo email nao pode estar vazio&quot;)
+    @Email(message = &quot;o email nao e valido&quot;)
+    private String email;
+
+    @NotNull
+    @Length(min = 8, max = 16, message=&quot;a senha deve conter entre 8 e 16 caracteres&quot;)
+    private String password;
+
+<span class="fc" id="L25">    public NewStudentUserDTO() {}</span>
+
+    public String getName() {
+<span class="fc" id="L28">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="fc" id="L32">        this.name = name;</span>
+<span class="fc" id="L33">    }</span>
+
+    public String getEmail() {
+<span class="fc" id="L36">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="fc" id="L40">        this.email = email;</span>
+<span class="fc" id="L41">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L44">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L48">        this.password = password;</span>
+<span class="fc" id="L49">    }</span>
+
+    public User toModel() {
+<span class="fc" id="L52">        return new User(name, email, STUDENT, password);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

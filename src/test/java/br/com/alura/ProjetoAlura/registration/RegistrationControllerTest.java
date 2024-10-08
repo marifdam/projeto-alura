@@ -1,31 +1,31 @@
-package br.com.alura.ProjetoAlura.user;
+package br.com.alura.ProjetoAlura.registration;
 
 import br.com.alura.ProjetoAlura.course.Course;
 import br.com.alura.ProjetoAlura.course.CourseRepository;
 import br.com.alura.ProjetoAlura.course.CourseStatus;
-import br.com.alura.ProjetoAlura.registration.RegistrationController;
-import br.com.alura.ProjetoAlura.registration.RegistrationDTO;
-import br.com.alura.ProjetoAlura.registration.RegistrationRepository;
+import br.com.alura.ProjetoAlura.user.NewStudentUserDTO;
+import br.com.alura.ProjetoAlura.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 
-import static net.bytebuddy.matcher.ElementMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-@WebMvcTest(RegistrationController.class)
 
+@ActiveProfiles("test")
+
+@WebMvcTest(RegistrationController.class)
 public class RegistrationControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -41,6 +41,10 @@ public class RegistrationControllerTest {
 
     @MockBean
     private UserRepository userRepository;
+
+    @MockBean
+    private DataSource dataSource;
+
 
     @Test
     void newRegistration__should_return_not_found_when_course_is_not_found() throws Exception {

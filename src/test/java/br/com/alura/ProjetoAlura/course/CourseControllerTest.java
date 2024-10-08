@@ -1,12 +1,15 @@
-package br.com.alura.ProjetoAlura.user;
+package br.com.alura.ProjetoAlura.course;
 
-import br.com.alura.ProjetoAlura.course.*;
+import br.com.alura.ProjetoAlura.user.NewInstructorUserDTO;
+import br.com.alura.ProjetoAlura.user.NewStudentUserDTO;
+import br.com.alura.ProjetoAlura.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
@@ -14,6 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("test")
 @WebMvcTest(CourseController.class)
 public class CourseControllerTest {
     @Autowired
@@ -27,6 +31,7 @@ public class CourseControllerTest {
 
     @MockBean
     private UserRepository userRepository;
+
 
     @Test
     void newCourse__should_return_bad_request_when_user_is_not_found() throws Exception {
