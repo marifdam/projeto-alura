@@ -52,7 +52,7 @@ public class RegistrationController {
 
         Registration registration = newRegistration.toModel();
         registrationRepository.save(registration);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(registration);
     }
 
     @GetMapping("/registration/report")
